@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yi.mapper.ThInfoMapper">
+		<resultMap type="ThInfo" id="thInfoForm">
+			<id column="th_name" property="thName"/>
+			<result column="th_kinds" property="thKinds"/>
+			<result column="th_price" property="thPrice"/>
+			<result column="th_withdrawal" property="thWithdrawal"/>
+		</resultMap>
+		
+		
+		<insert id="insertTheater" parameterType="ThInfo">
+			insert into th_info(th_name, th_kinds, th_price) values (#{thName}, #{thKinds}, #{thPrice})
+		</insert>
+		
+		<select id="theaterList" resultType="ThInfo">
+			select * from th_info where th_withdrawal=true order by length(th_name)
+		</select>
+		
+		<select id="selectName" parameterType="String" resultType="ThInfo">
+			select * from th_info where th_name=#{thName} and th_withdrawal=true
+		</select>
+		
+		<select id="selectNameByAll" parameterType="String" resultType="ThInfo">
+			select * from th_info where th_name=#{thName} and th_withdrawal=false
+		</select>
+		
+		<update id="delTheater" parameterType="String">
+			update th_info
+			set th_withdrawal = false
+			where th_name = #{name}
+		</update>
+		
+		<update id="reTheater" parameterType="map">
+			update th_info
+			set th_withdrawal = true, th_kinds = #{kind}, th_price = #{price}
+			where th_name = #{name}
+		</update>
+</mapper>
+
+
+
+
+
+
+

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yi.mapper.StructureMapper">
+		<resultMap type="Structure" id="structureForm">
+			<id column="seat_number" property="seatNumber"/>
+			<result column="st_row" property="stRow"/>
+			<result column="st_column" property="stColumn"/>
+			<result column="use_withdrawal" property="useWithdrawal"/>
+		</resultMap>
+		
+		<resultMap type="Structure" id="structureForm2" extends="structureForm">
+			<association property="thName" resultMap="com.yi.mapper.ThInfoMapper.thInfoForm"/>
+		</resultMap>
+		
+		<select id="selectByKwan" parameterType="String" resultMap="structureForm2">
+			select * from structure where th_name=#{kwan} order by th_name, st_row, length(seat_number), seat_number;
+		</select>
+		
+		<select id="select1" resultMap="structureForm2" parameterType="String">
+			select * from `structure` where th_name=#{tname} order by th_name, st_row, length(seat_number), seat_number
+		</select>
+		
+		 <update id="selectedRemove" parameterType="map">
+			update structure
+			set use_withdrawal = #{false}
+			where th_name = #{thName} and seat_number = #{seatNumber}
+		</update> 
+		
+		 <update id="rowRemove" parameterType="map">
+			update structure
+			set use_withdrawal = #{false}
+			where th_name = #{thName} and st_row = #{row}
+		</update> 
+		
+		 <update id="colRemove" parameterType="map">
+			update structure
+			set use_withdrawal = #{false}
+			where th_name = #{thName} and st_column = #{col}
+		</update> 
+		
+		<update id="restore" parameterType="String">
+			update structure
+			set use_withdrawal = true
+			where th_name = #{tname}
+		</update> 
+		
+		<insert id="insertTheaterStructure" parameterType="ThInfo">
+			insert into structure values 
+			(#{thName},'A1','A',1,1),(#{thName},'A2','A',2,1),(#{thName},'A3','A',3,1),(#{thName},'A4','A',4,1),(#{thName},'A5','A',5,1),(#{thName},'A6','A',6,1),(#{thName},'A7','A',7,1),(#{thName},'A8','A',8,1),
+			(#{thName},'A9','A',9,1),(#{thName},'A10','A',10,1),(#{thName},'A11','A',11,1),(#{thName},'A12','A',12,1),(#{thName},'A13','A',13,1),(#{thName},'A14','A',14,1),(#{thName},'A15','A',15,1),(#{thName},'A16','A',16,1),
+			
+			(#{thName},'B1','B',1,1),(#{thName},'B2','B',2,1),(#{thName},'B3','B',3,1),(#{thName},'B4','B',4,1),(#{thName},'B5','B',5,1),(#{thName},'B6','B',6,1),(#{thName},'B7','B',7,1),(#{thName},'B8','B',8,1),
+			(#{thName},'B9','B',9,1),(#{thName},'B10','B',10,1),(#{thName},'B11','B',11,1),(#{thName},'B12','B',12,1),(#{thName},'B13','B',13,1),(#{thName},'B14','B',14,1),(#{thName},'B15','B',15,1),(#{thName},'B16','B',16,1),
+			
+			(#{thName},'C1','C',1,1),(#{thName},'C2','C',2,1),(#{thName},'C3','C',3,1),(#{thName},'C4','C',4,1),(#{thName},'C5','C',5,1),(#{thName},'C6','C',6,1),(#{thName},'C7','C',7,1),(#{thName},'C8','C',8,1),
+			(#{thName},'C9','C',9,1),(#{thName},'C10','C',10,1),(#{thName},'C11','C',11,1),(#{thName},'C12','C',12,1),(#{thName},'C13','C',13,1),(#{thName},'C14','C',14,1),(#{thName},'C15','C',15,1),(#{thName},'C16','C',16,1),
+			
+			(#{thName},'D1','D',1,1),(#{thName},'D2','D',2,1),(#{thName},'D3','D',3,1),(#{thName},'D4','D',4,1),(#{thName},'D5','D',5,1),(#{thName},'D6','D',6,1),(#{thName},'D7','D',7,1),(#{thName},'D8','D',8,1),
+			(#{thName},'D9','D',9,1),(#{thName},'D10','D',10,1),(#{thName},'D11','D',11,1),(#{thName},'D12','D',12,1),(#{thName},'D13','D',13,1),(#{thName},'D14','D',14,1),(#{thName},'D15','D',15,1),(#{thName},'D16','D',16,1),
+			
+			(#{thName},'E1','E',1,1),(#{thName},'E2','E',2,1),(#{thName},'E3','E',3,1),(#{thName},'E4','E',4,1),(#{thName},'E5','E',5,1),(#{thName},'E6','E',6,1),(#{thName},'E7','E',7,1),(#{thName},'E8','E',8,1),
+			(#{thName},'E9','E',9,1),(#{thName},'E10','E',10,1),(#{thName},'E11','E',11,1),(#{thName},'E12','E',12,1),(#{thName},'E13','E',13,1),(#{thName},'E14','E',14,1),(#{thName},'E15','E',15,1),(#{thName},'E16','E',16,1),
+			
+			(#{thName},'F1','F',1,1),(#{thName},'F2','F',2,1),(#{thName},'F3','F',3,1),(#{thName},'F4','F',4,1),(#{thName},'F5','F',5,1),(#{thName},'F6','F',6,1),(#{thName},'F7','F',7,1),(#{thName},'F8','F',8,1),
+			(#{thName},'F9','F',9,1),(#{thName},'F10','F',10,1),(#{thName},'F11','F',11,1),(#{thName},'F12','F',12,1),(#{thName},'F13','F',13,1),(#{thName},'F14','F',14,1),(#{thName},'F15','F',15,1),(#{thName},'F16','F',16,1),
+			
+			(#{thName},'G1','G',1,1),(#{thName},'G2','G',2,1),(#{thName},'G3','G',3,1),(#{thName},'G4','G',4,1),(#{thName},'G5','G',5,1),(#{thName},'G6','G',6,1),(#{thName},'G7','G',7,1),(#{thName},'G8','G',8,1),
+			(#{thName},'G9','G',9,1),(#{thName},'G10','G',10,1),(#{thName},'G11','G',11,1),(#{thName},'G12','G',12,1),(#{thName},'G13','G',13,1),(#{thName},'G14','G',14,1),(#{thName},'G15','G',15,1),(#{thName},'G16','G',16,1),
+			
+			(#{thName},'H1','H',1,1),(#{thName},'H2','H',2,1),(#{thName},'H3','H',3,1),(#{thName},'H4','H',4,1),(#{thName},'H5','H',5,1),(#{thName},'H6','H',6,1),(#{thName},'H7','H',7,1),(#{thName},'H8','H',8,1),
+			(#{thName},'H9','H',9,1),(#{thName},'H10','H',10,1),(#{thName},'H11','H',11,1),(#{thName},'H12','H',12,1),(#{thName},'H13','H',13,1),(#{thName},'H14','H',14,1),(#{thName},'H15','H',15,1),(#{thName},'H16','H',16,1),
+			
+			(#{thName},'I1','I',1,1),(#{thName},'I2','I',2,1),(#{thName},'I3','I',3,1),(#{thName},'I4','I',4,1),(#{thName},'I5','I',5,1),(#{thName},'I6','I',6,1),(#{thName},'I7','I',7,1),(#{thName},'I8','I',8,1),
+			(#{thName},'I9','I',9,1),(#{thName},'I10','I',10,1),(#{thName},'I11','I',11,1),(#{thName},'I12','I',12,1),(#{thName},'I13','I',13,1),(#{thName},'I14','I',14,1),(#{thName},'I15','I',15,1),(#{thName},'I16','I',16,1),
+			
+			(#{thName},'J1','J',1,1),(#{thName},'J2','J',2,1),(#{thName},'J3','J',3,1),(#{thName},'J4','J',4,1),(#{thName},'J5','J',5,1),(#{thName},'J6','J',6,1),(#{thName},'J7','J',7,1),(#{thName},'J8','J',8,1),
+			(#{thName},'J9','J',9,1),(#{thName},'J10','J',10,1),(#{thName},'J11','J',11,1),(#{thName},'J12','J',12,1),(#{thName},'J13','J',13,1),(#{thName},'J14','J',14,1),(#{thName},'J15','J',15,1),(#{thName},'J16','J',16,1),
+			
+			(#{thName},'K1','K',1,1),(#{thName},'K2','K',2,1),(#{thName},'K3','K',3,1),(#{thName},'K4','K',4,1),(#{thName},'K5','K',5,1),(#{thName},'K6','K',6,1),(#{thName},'K7','K',7,1),(#{thName},'K8','K',8,1),
+			(#{thName},'K9','K',9,1),(#{thName},'K10','K',10,1),(#{thName},'K11','K',11,1),(#{thName},'K12','K',12,1),(#{thName},'K13','K',13,1),(#{thName},'K14','K',14,1),(#{thName},'K15','K',15,1),(#{thName},'K16','K',16,1),
+			
+			(#{thName},'L1','L',1,1),(#{thName},'L2','L',2,1),(#{thName},'L3','L',3,1),(#{thName},'L4','L',4,1),(#{thName},'L5','L',5,1),(#{thName},'L6','L',6,1),(#{thName},'L7','L',7,1),(#{thName},'L8','L',8,1),
+			(#{thName},'L9','L',9,1),(#{thName},'L10','L',10,1),(#{thName},'L11','L',11,1),(#{thName},'L12','L',12,1),(#{thName},'L13','L',13,1),(#{thName},'L14','L',14,1),(#{thName},'L15','L',15,1),(#{thName},'L16','L',16,1)
+		</insert>
+		
+</mapper>
+
+
+
+
+
+
+

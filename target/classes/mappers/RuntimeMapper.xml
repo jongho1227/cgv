@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yi.mapper.RuntimeMapper">
+		<resultMap type="RunTime" id="runtimeForm">
+			<id column="rt_number" property="rtNumber"/>
+			<result column="rt_name" property="rtName"/>
+			<result column="th_start" property="thStart"/>
+			<result column="th_end" property="thEnd"/>
+			<result column="rt_price" property="rtPrice"/>
+			<result column="rt_withdrawal" property="rtWithdrawal"/>
+		</resultMap>
+		
+		<resultMap type="RunTime" id="runtimeForm2" extends="runtimeForm">
+			<association property="mvNumber" resultMap="com.yi.mapper.MovieMapper.movieForm"></association>
+			<association property="thName" resultMap="com.yi.mapper.ThInfoMapper.thInfoForm"></association>
+		</resultMap>
+		
+		<insert id="insertRunMovie" parameterType="RunTime">
+			insert into runtime(mv_number, rt_name, th_name, th_start, th_end, rt_price) 
+			values (#{mvNumber.mvNumber}, #{rtName}, #{thName.thName}, #{thStart}, #{thEnd}, #{rtPrice})
+		</insert>
+		
+		<select id="selectAll" resultMap="runtimeForm2">
+			select * from runtime where rt_withdrawal = true order by th_start
+		</select>
+		
+		<select id="selectOneClose" resultMap="runtimeForm2">
+			select * from runtime where rt_withdrawal = true order by th_start limit 1
+		</select>
+		
+		<select id="selectDateClose" resultMap="runtimeForm2">
+			select * from runtime where rt_withdrawal = true and DATE(th_start) = #{closeDate} order by rt_name, th_name, th_start
+		</select>
+		
+		<select id="selectDateAll" parameterType="String" resultMap="runtimeForm2">
+			SELECT * FROM runtime WHERE DATE(th_start)=#{showDate};
+		</select>
+		
+		<select id="selectByNN" parameterType="Movie" resultMap="runtimeForm2">
+			select * from runtime where mv_number = #{mvNumber} and rt_name = #{mvTitle} and rt_withdrawal = true
+		</select>
+		
+		<select id="selectByNumber" parameterType="int" resultMap="runtimeForm2">
+			select * from runtime where rt_number = #{rtNumber}
+		</select>
+		
+		<select id="selectByTimeAndThName" parameterType="RunTime" resultMap="runtimeForm2">
+			select * from runtime where th_name=#{thName.thName} and th_end &gt; #{thStart} and th_start &lt; #{thEnd}
+		</select>
+		
+		<update id="updateRMovie" parameterType="RunTime">
+		 	update runtime
+		 	set th_name=#{thName.thName}, th_start =#{thStart}, th_end = #{thEnd}, rt_price = #{rtPrice}
+		 	where rt_number = #{rtNumber}
+		</update>
+		
+		<select id="recentInsert" resultMap="runtimeForm2">
+			select * from runtime order by rt_number desc limit 1
+		</select>
+		
+		<update id="endRmovie" parameterType="RunTime">
+			update runtime
+			set rt_withdrawal = false
+			where rt_number = #{rtNumber}
+		</update>
+</mapper>
+
+
+
+
+
+
+

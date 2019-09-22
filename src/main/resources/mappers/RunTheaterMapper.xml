@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yi.mapper.RunTheaterMapper">
+		<resultMap type="RunTheater" id="runTheaterForm">
+			<result column="rt_number" property="rtNumber"/>
+			<result column="th_name" property="thName"/>
+			<result column="seat_number" property="seatNumber"/>
+			<result column="rv_withdrawal" property="rvWithdrawal"/>
+		</resultMap>
+		
+		
+		<insert id="insertRunTheater" parameterType="map">
+			<if test="sList.size != 0">
+			insert into runtheater(rt_number, th_name, seat_number) 
+			values
+			<foreach collection="sList" item="item" separator=",">
+			(
+				#{rtNumber},
+				#{item.thName.thName},
+				#{item.seatNumber}
+			)
+			</foreach>
+			</if>
+			
+		</insert>
+		
+		<update id="updateBykwan" parameterType="RunTime">
+			update runtheater
+			set th_name=#{thName.thName}
+			where rt_number = #{rtNumber}
+		</update>
+		
+		<select id="selectAllSeat" parameterType="map" resultType="RunTheater">
+			select * from runtheater where rt_number = #{no} and th_name=#{kwan}
+		</select>
+		
+		<select id="selectUnReserve" parameterType="map" resultType="RunTheater">
+			select * from runtheater where rt_number = #{no} and th_name=#{kwan} and rv_withdrawal = false
+		</select>
+</mapper>
+
+
+
+
+
+
+

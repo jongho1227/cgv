@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yi.mapper.MovieMapper">
+		<resultMap type="Movie" id="movieForm">
+			<id column="mv_number" property="mvNumber"/>
+			<result column="mv_title" property="mvTitle"/>
+			<result column="mv_start" property="mvStart"/>
+			<result column="mv_genre" property="mvGenre"/>
+			<result column="mv_img" property="mvImg"/>
+			<result column="mv_price" property="mvPrice"/>
+			<result column="mv_age_limit" property="mvAgeLimit"/>
+			<result column="mv_runtime" property="mvRuntime"/>
+			<result column="mv_summary" property="mvSummary"/>
+			<result column="mv_withdrawal" property="mvWithdrawal"/>
+		</resultMap>
+		
+		
+		<insert id="insertMovie" parameterType="Movie">
+			insert into movie(mv_title,mv_start, mv_genre, mv_summary, mv_img, mv_age_limit, mv_runtime) 
+			values (#{mvTitle},#{mvStart},#{mvGenre}, #{mvSummary}, #{mvImg}, #{mvAgeLimit}, #{mvRuntime})
+		</insert>
+		<select id="selectMovie" parameterType="Movie" resultType="Movie">
+			SELECT * FROM movie where mv_number = #{mvNumber} and mv_withdrawal = true;
+		</select>
+		
+		<select id="selectMovieAll" resultType="Movie">
+			SELECT * FROM movie where mv_withdrawal = true
+		</select>
+		
+		<select id="selectFirst" resultType="Movie">
+			select * from movie where mv_withdrawal = true limit 1;
+		</select>
+		
+		<update id="endMv" parameterType="Movie">
+			update movie
+			set mv_withdrawal = false
+			where mv_title = #{mvTitle} and mv_number = #{mvNumber}
+		</update>
+		
+		<update id="updateMv" parameterType="Movie">
+			update movie
+			set mv_summary=#{mvSummary}, mv_img=#{mvImg}, mv_age_limit=#{mvAgeLimit}, 
+			    mv_runtime=#{mvRuntime}, mv_start=#{mvStart}, mv_genre=#{mvGenre}
+			where mv_number=#{mvNumber}
+		</update>
+</mapper>
+
+
+
+
+
+
+
