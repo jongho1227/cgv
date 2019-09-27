@@ -145,7 +145,7 @@ tr, td{
 		 var ctDate = new Date(c);
 		 var cttDate = ctDate.getFullYear()+"-"+("00"+(ctDate.getMonth()+1)).slice(-2)+"-"+("00"+ctDate.getDate()).slice(-2);
 		 $("#st").val(cttDate);
-		 
+		 diffDay = 0;
 		 if((c-b)>0){
 			 diffDay = Math.ceil((c-b)/(1000*60*60*24));
 		 }

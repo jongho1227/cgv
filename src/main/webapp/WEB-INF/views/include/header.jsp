@@ -19,6 +19,8 @@
 }
 body{
 	background: #fdfcf0;
+	min-width:1900px;
+	font-family: 'CJONLYONENEW', '맑은 고딕', '돋움', Dotum, sans-serif;
 }
 ul{
 	list-style: none;
@@ -147,7 +149,19 @@ div#top_image #top_a_x{
 	overflow:hidden;
 	display:block;
 }
+#top_nav1 #ul_right li a.loginOut{
+	background:url("${pageContext.request.contextPath}/resources/images/common_sprite_area_v4_2016.png");
+	width:43px;
+	height:30px;
+	padding: 0 10px;
+	background-position: -521px 9px;
+	overflow:hidden;
+	display:block;
+}
 #top_nav1 #ul_right li a.login span{
+	display: none;
+}
+#top_nav1 #ul_right li a.loginOut span{
 	display: none;
 }
 #top_nav1 #ul_right li a.join{
@@ -674,8 +688,13 @@ footer #footer_brick{
 				<li><a href="#" class="frugal"><span>알뜰한 영화관람법!</span></a></li>
 			</ul>
 			<ul id="ul_right">
-				<li><a href="#" class="login"><span>로그인</span></a></li>
-				<li><a href="#" class="join"><span>회원가입</span></a></li>
+				<c:if test="${Auth==null }">
+					<li><a href="${pageContext.request.contextPath }/member/login" class="login"><span>로그인</span></a></li>
+					<li><a href="${pageContext.request.contextPath }/member/join" class="join"><span>회원가입</span></a></li>
+				</c:if>
+				<c:if test="${Auth!=null }">
+					<li><a href="${pageContext.request.contextPath }/member/loginOut" class="loginOut"><span>로그아웃</span></a></li>
+				</c:if>
 				<li><a href="#" class="mycgv"><span>MY CGV</span></a></li>
 				<li><a href="#" class="vip"><span>VIP LOUNGE</span></a></li>
 				<li><a href="#" class="specialclub"><span>CLUB 서비스</span></a></li>
@@ -686,7 +705,7 @@ footer #footer_brick{
 		<div id="bg_header">
 		<nav id="top_nav2">
 			<h2><img src="${pageContext.request.contextPath}/resources/images/h2_cultureplex.png" id="cul"></h2>
-			<a href="#"><img src="${pageContext.request.contextPath}/resources/images/h1_cgv.png" id="cgv"></a>
+			<a href="${pageContext.request.contextPath }/"><img src="${pageContext.request.contextPath}/resources/images/h1_cgv.png" id="cgv"></a>
 			<ul>
 				<li><a href="#" class="movie"><span>영화</span></a>
 					<div class="div_submenu">
@@ -738,3 +757,6 @@ footer #footer_brick{
 		</nav>
 		</div>
 </header>
+<script>
+	
+</script>

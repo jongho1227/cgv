@@ -82,7 +82,9 @@ public class Movie {
 				+ ", mvWithdrawal=" + mvWithdrawal + ", mvStart=" + mvStart + ", mvGenre=" + mvGenre + "]";
 	}
 	
-	
+	public String toString2() {
+		return "[영화이름=" + mvTitle + "mvAgeLimit=" + mvAgeLimit + ", mvRuntime=" + mvRuntime + "]";
+	}
 	
 	
 }

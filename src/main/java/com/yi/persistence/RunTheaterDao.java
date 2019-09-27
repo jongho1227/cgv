@@ -10,5 +10,7 @@ public interface RunTheaterDao {
 	public void insertRunTheater(Map<String, Object> rMap) throws Exception;
 	public void updateBykwan(RunTime rt) throws Exception;
 	public List<RunTheater> selectAllSeat(Map<String, Object> map) throws Exception;
-	public List<RunTheater> selectUnReserve(Map<String, Object> map) throws Exception;
+	public List<RunTheater> selectUnReserve(String no) throws Exception;
+	public void updateByRev(Map<String, Object> map) throws Exception;
+	
 }

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yi.mapper.ReservationMapper">
+		<resultMap type="Reservation" id="reservationForm">
+			<id column="rv_order" property="rvOrder"/>
+			<result column="rv_number" property="rvNumber"/>
+			<result column="rv_time" property="rvTime"/>
+			<result column="rv_payment" property="rvPayment"/>
+			<result column="rv_cancel" property="rvCancel"/>
+		</resultMap>
+		<resultMap type="Reservation" id="reservationForm2" extends="reservationForm">
+			<association property="mbId" resultMap="com.yi.mapper.MemberMapper.memberForm2"></association>
+			<association property="rtNumber" resultMap="com.yi.mapper.RunTheaterMapper.runTheaterForm2"></association>
+			<association property="thName" resultMap="com.yi.mapper.RunTheaterMapper.runTheaterForm2"></association>
+			<association property="seatNumber" resultMap="com.yi.mapper.RunTheaterMapper.runTheaterForm2"></association>
+		</resultMap>
+		<insert id="insertRev" parameterType="map">
+			insert into reservation(mb_id, rt_number, th_name, seat_number, rv_number, rv_payment)
+			values(#{id},#{rtNumber},#{kwan},#{seat},#{number},#{totalprice})
+		</insert>
+		
+</mapper>
+
+
+
+
+
+
+

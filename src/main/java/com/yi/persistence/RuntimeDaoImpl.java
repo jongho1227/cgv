@@ -1,7 +1,7 @@
 package com.yi.persistence;
 
-import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,6 +81,23 @@ public class RuntimeDaoImpl implements RuntimeDao {
 	public List<RunTime> selectDateClose(String closeDate) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlsession.selectList(namespace+".selectDateClose",closeDate);
+	}
+
+	@Override
+	public List<RunTime> selectDateCloseKwan(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlsession.selectList(namespace+".selectDateCloseKwan",map);
+	}
+
+	@Override
+	public List<RunTime> selectDateCloseKwanTime(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlsession.selectList(namespace+".selectDateCloseKwanTime",map);
+	}
+	@Override
+	public List<RunTime> selectruntheater(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlsession.selectList(namespace+".selectruntheater", map);
 	}
 
 }

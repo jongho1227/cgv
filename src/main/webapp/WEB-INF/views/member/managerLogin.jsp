@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -89,19 +90,12 @@
 	
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script>
-	$(function(){
-		if(${Mgn==0}){
-			alert("존재하지 않는 아이디이거나, 비밀번호가 틀립니다.");
-		}
-			
-	})
-</script>
+
 </head>
 <body>
 <div id="background">
 	<div id="loginContainer">
-		<form action="manager.do" method="post">
+		<form action="managerLoginPost" method="post">
 			<div id="login">
 				<div id="loginBox">
 					<p id="manager">관리자</p>
@@ -110,9 +104,9 @@
 				</div>
 				<div id="inputBox">
 					<label><img src="${pageContext.request.contextPath}/resources/images/manager/id.gif"></label>
-					<input type="text" name="id" autocomplete="off"><br><br>
+					<input type="text" name="mgId" autocomplete="off"><br><br>
 					<label><img src="${pageContext.request.contextPath}/resources/images/manager/pw.gif"></label>
-					<input type="password" name="password"><br><br><br>
+					<input type="password" name="mgPass"><br><br><br>
 					<p>이페이지는 <span>관리자 전용 로그인 페이지</span> 입니다.</p>
 					<p>관리자 외 접속을 삼가해 주십시오.<a href="${pageContext.request.contextPath}"><img src="${pageContext.request.contextPath}/resources/images/manager/go_main.gif"></a></p>
 				</div>
@@ -124,4 +118,10 @@
 	</div>
 </div>
 </body>
+<script>
+<c:if test="${loginResult=='fail' }">
+alert("아이디가 없거나 비밀번호가 틀립니다.");
+<% session.removeAttribute("loginResult");%>
+</c:if>
+</script>
 </html>

@@ -10,7 +10,15 @@ public class Reservation {
 	private RunTheater seatNumber;
 	private int rvNumber;
 	private Date rvTime;
+	private int rvPayment;
 	private boolean rvCancel;
+	
+	public int getRvPayment() {
+		return rvPayment;
+	}
+	public void setRvPayment(int rvPayment) {
+		this.rvPayment = rvPayment;
+	}
 	public int getRvOrder() {
 		return rvOrder;
 	}
@@ -62,9 +70,10 @@ public class Reservation {
 	@Override
 	public String toString() {
 		return "Reservation [rvOrder=" + rvOrder + ", mbId=" + mbId + ", rtNumber=" + rtNumber + ", thName=" + thName
-				+ ", seatNumber=" + seatNumber + ", rvNumber=" + rvNumber + ", rvTime=" + rvTime + ", rvCancel="
-				+ rvCancel + "]";
+				+ ", seatNumber=" + seatNumber + ", rvNumber=" + rvNumber + ", rvTime=" + rvTime + ", rvPayment="
+				+ rvPayment + ", rvCancel=" + rvCancel + "]";
 	}
+	
 	
 	
 	

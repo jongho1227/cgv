@@ -486,7 +486,56 @@
 	margin-top:10px;
 }
 
+#anchor{
+	width: 100%;
+    background-color: #f1f0e5;
+    border-bottom: 1px solid #cacac0;
+    color: #666;
+    font-family: 'CJONLYONENEW', '맑은 고딕', '돋움', Dotum, sans-serif;
+    font-weight: 300;
+    height:25px;
+}
+#anchor ul{
+	list-style: none;
+	width:980px;
+	margin:0 auto;
+}
+#anchor ul li{
+	float: left;
+	line-height: 25px;
+	margin-left: 12px;
+    padding-left: 20px;
+    background: url(${pageContext.request.contextPath}/resources/images/join/ico_arrow.png) no-repeat 0 50%;
+    font-size: 12px;
+    vertical-align: baseline;
+	
+}
+#anchor ul li:first-child {
+	background: none;
+}
+#anchor ul li:first-child img{
+	margin-top:4px;
+}
+#anchor ul li.last{
+	color: #222;
+    font-size: 12px;
+    text-decoration: underline;
+    font-weight: 500;
+}
 </style>
+<div id="anchor">
+	<ul>
+		<li>
+			<a href="/cgv"><img src="http://img.cgv.co.kr/R2014/images/common/btn/btn_home.png"></a>
+		</li>
+		<li>
+			<a href="/cgv/reserve/showTimes2">예매</a>
+		</li>
+		<li class="last">
+			빠른예매
+		</li>
+	</ul>
+</div>
 
 
 <!-- -------------------------------------------------------section------------------------------------------------------------------- -->

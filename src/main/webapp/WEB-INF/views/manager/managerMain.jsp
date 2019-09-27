@@ -37,7 +37,6 @@
 		list-style: none;
 	}
 	#container{
-		border:1px solid white;
 		width:1020px;
 		height:30px;
 		margin-left:500px;
@@ -51,7 +50,7 @@
 	}
 	#menu .mainMenu{
 		float: left;
-		width:250px;
+		width:200px;
 		height:30px;
 		line-height:30px;
 		text-align:center;
@@ -124,6 +123,12 @@ $(function() {
 								<li><a href="${pageContext.request.contextPath }/manager/deleteTheater" class="subA">영화관 삭제</a></li>
 								<li><a href="${pageContext.request.contextPath }/manager/updateTheater" class="subA">영화관 수정</a></li>
 							</ul>
+					</li>
+					<li class="mainMenu">
+						<a href="${pageContext.request.contextPath }" class="mainA">홈</a>
+					</li>
+					<li class="mainMenu">
+						<a href="${pageContext.request.contextPath }/member/managerLogOut" class="mainA">로그아웃</a>
 					</li>
 				</ul>
 			</div>

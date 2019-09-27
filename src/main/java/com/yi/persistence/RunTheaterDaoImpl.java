@@ -36,9 +36,16 @@ public class RunTheaterDaoImpl implements RunTheaterDao {
 	}
 
 	@Override
-	public List<RunTheater> selectUnReserve(Map<String, Object> map) throws Exception {
+	public List<RunTheater> selectUnReserve(String no) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlsession.selectList(namespace+".selectUnReserve", map);
+		return sqlsession.selectList(namespace+".selectUnReserve", no);
 	}
+
+	@Override
+	public void updateByRev(Map<String, Object> map) throws Exception {
+		sqlsession.update(namespace+".updateByRev", map);
+		
+	}
+
 
 }

@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.yi.domain.RunTheater;
+import com.yi.domain.RunTime;
 import com.yi.domain.Structure;
 import com.yi.domain.ThInfo;
 import com.yi.service.TheaterServiceHandlerDao;
@@ -165,6 +167,16 @@ public class ManagerTheaterController {
 		logger.info("==============================tname="+tname);
 		logger.info("==============================kind="+kind);
 		logger.info("==============================selected="+selected);
+		Map<String, Object> map = new HashMap<>();
+		map.put("kwan", tname);
+		List<RunTime> rList = mService.selectruntheater(map);
+		if(rList.size()>0) {
+			Map<String, Object> rMap = new HashMap<>();
+			rMap.put("result", "fail");
+			ResponseEntity<Map<String, Object>> entity = new ResponseEntity<Map<String,Object>>(rMap, HttpStatus.OK);
+			return entity;
+		}
+		
 		if(kind.equals("selectedRemove")) {
 			for(int i=0; i<selected.length; i++) {
 				Map<String, Object> update = new HashMap<>();

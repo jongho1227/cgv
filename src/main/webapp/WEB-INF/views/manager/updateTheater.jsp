@@ -119,27 +119,27 @@
 				<div id="seat">
 					 <div class="row A">	
 					 </div>
-					  <div class="row B">	
+					 <div class="row B">	
 					 </div>
-					  <div class="row C">	
+					 <div class="row C">	
 					 </div>
-					  <div class="row D">	
+					 <div class="row D">	
 					 </div>
-					  <div class="row E">	
+					 <div class="row E">	
 					 </div>
-					  <div class="row F">	
+					 <div class="row F">	
 					 </div>
-					  <div class="row G">	
+					 <div class="row G">	
 					 </div>
-					  <div class="row H">	
+					 <div class="row H">	
 					 </div>
-					  <div class="row I">	
+					 <div class="row I">	
 					 </div>
-					  <div class="row J">	
+					 <div class="row J">	
 					 </div>
-					  <div class="row K">	
+					 <div class="row K">	
 					 </div>
-					  <div class="row L">	
+					 <div class="row L">	
 					 </div>
 				</div>
 			</div>
@@ -185,6 +185,9 @@
 			dataType : "json",
 			success : function(res){
 				console.log(res);
+				if(res.result=="fail"){
+					alert("상영중인 영화관은 수정할 수 없습니다.");
+				}
 				getTheater(tname);
 			}
 		}) 
@@ -206,6 +209,9 @@
 			dataType : "json",
 			success : function(res){
 				console.log(res);
+				if(res.result=="fail"){
+					alert("상영중인 영화관은 수정할 수 없습니다.");
+				}
 				getTheater(tname);
 			}
 		}) 
@@ -228,6 +234,9 @@
 			dataType : "json",
 			success : function(res){
 				console.log(res);
+				if(res.result=="fail"){
+					alert("상영중인 영화관은 수정할 수 없습니다.");
+				}
 				getTheater(tname);
 			}
 		}) 
@@ -244,6 +253,9 @@
 			dataType : "json",
 			success : function(res){
 				console.log(res);
+				if(res.result=="fail"){
+					alert("상영중인 영화관은 수정할 수 없습니다.");
+				}
 				getTheater(tname);
 			}
 		}) 
@@ -348,8 +360,8 @@
 						}
 						if(obj.useWithdrawal==true){
 							$a.html(obj.stColumn);
-							$spanR.append($a);
-							$(".F").append($spanR);
+							$spanG.append($a);
+							$(".F").append($spanG);
 						}else{
 							$a.html(" ");
 							$spanW.append($a);
@@ -362,8 +374,8 @@
 						}
 						if(obj.useWithdrawal==true){
 							$a.html(obj.stColumn);
-							$spanR.append($a);
-							$(".G").append($spanR);
+							$spanG.append($a);
+							$(".G").append($spanG);
 						}else{
 							$a.html(" ");
 							$spanW.append($a);

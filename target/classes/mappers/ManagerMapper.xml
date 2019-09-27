@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yi.mapper.ManagerMapper">
+	<resultMap type="Manager" id="managerForm">
+		<id column="mg_id" property="mgId"/>
+		<result column="mg_pass" property="mgPass"/>
+	</resultMap>
+		<select id="selectManager" parameterType="Manager" resultMap="managerForm">
+			select * from manager where mg_id=#{mgId} and mg_pass=password(#{mgPass})
+		</select>
+</mapper>
+
+
+
+
+
+
+

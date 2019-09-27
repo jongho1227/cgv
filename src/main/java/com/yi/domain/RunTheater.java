@@ -4,7 +4,17 @@ public class RunTheater {
 	private int rtNumber;
 	private String thName;
 	private String seatNumber;
+	private Structure structure;
 	private boolean rvWithdrawal;
+	
+	
+	
+	public Structure getStructure() {
+		return structure;
+	}
+	public void setStructure(Structure structure) {
+		this.structure = structure;
+	}
 	public int getRtNumber() {
 		return rtNumber;
 	}
@@ -31,10 +41,9 @@ public class RunTheater {
 	}
 	@Override
 	public String toString() {
-		return "RunTheater [rtNumber=" + rtNumber + ", thName=" + thName + ", seatNumber=" + seatNumber
-				+ ", rvWithdrawal=" + rvWithdrawal + "]";
+		return "RunTheater [rtNumber=" + rtNumber + ", thName=" + thName + ", seatNumber=" + seatNumber + ", structure="
+				+ structure + ", rvWithdrawal=" + rvWithdrawal + "]";
 	}
-	
 	
 	
 	

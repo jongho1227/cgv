@@ -10,6 +10,8 @@
 			<result column="th_end" property="thEnd"/>
 			<result column="rt_price" property="rtPrice"/>
 			<result column="rt_withdrawal" property="rtWithdrawal"/>
+			<result column="allSeat" property="allSeat"/>
+			<result column="remainSeat" property="remainSeat"/> 
 		</resultMap>
 		
 		<resultMap type="RunTime" id="runtimeForm2" extends="runtimeForm">
@@ -30,8 +32,27 @@
 			select * from runtime where rt_withdrawal = true order by th_start limit 1
 		</select>
 		
+		<!-- <select id="selectDateClose" resultMap="runtimeForm2">
+			select distinct mv_number from runtime where rt_withdrawal = true and DATE(th_start) = #{closeDate} order by rt_name, th_name, th_start
+		</select> -->
+		
 		<select id="selectDateClose" resultMap="runtimeForm2">
-			select * from runtime where rt_withdrawal = true and DATE(th_start) = #{closeDate} order by rt_name, th_name, th_start
+			select *,(select count(s.use_withdrawal) from th_info t join `structure` s on t.th_name = s.th_name 
+			where t.th_name=r.th_name and s.use_withdrawal = true) as allSeat,
+			(select count(rt.rv_withdrawal) from runtheater rt join `structure` s on rt.seat_number = s.seat_number join runtime r on rt.rt_number = r.rt_number
+			where rt.th_name=s.th_name and rt.rt_number=r.rt_number and rt.rv_withdrawal = false and s.use_withdrawal=true
+			group by rt.rt_number having rt.rt_number=r.rt_number) as remainSeat
+			from runtime r join th_info t on r.th_name = t.th_name
+			join movie m on r.mv_number = m.mv_number
+			where rt_withdrawal = true and DATE(th_start)=#{closeDate} order by r.rt_name, length(r.th_name), r.th_start;
+		</select>
+		
+		<select id="selectDateCloseKwan" parameterType="map" resultMap="runtimeForm2">
+			select  distinct th_name from runtime where rt_withdrawal = true and DATE(th_start)=#{closeDate} and mv_number=#{mNumber} order by rt_name, th_name, th_start
+		</select>
+		
+		<select id="selectDateCloseKwanTime" parameterType="map" resultMap="runtimeForm2">
+			select * from runtime where rt_withdrawal = true and DATE(th_start)=#{closeDate} and mv_number=#{mNumber} and th_name=#{tName} order by rt_name, th_name, th_start
 		</select>
 		
 		<select id="selectDateAll" parameterType="String" resultMap="runtimeForm2">
@@ -65,6 +86,9 @@
 			set rt_withdrawal = false
 			where rt_number = #{rtNumber}
 		</update>
+		<select id="selectruntheater" parameterType="map" resultMap="runtimeForm2">
+			select * from runtime where th_name=#{kwan} and rt_withdrawal = true
+		</select>
 </mapper>
 
 

@@ -32,6 +32,31 @@
 	
 	<context:component-scan base-package="com.yi.controller" />
 	
+	 <beans:bean id="loginInterceptor" class="com.yi.interceptor.LoginInterceptor"/>
+	 <beans:bean id="authInterceptor" class="com.yi.interceptor.AuthInterceptor"/>
+	  <beans:bean id="managerLoginInterceptor" class="com.yi.interceptor.ManagerLoginInterceptor"/>
+	 <beans:bean id="managerAuthInterceptor" class="com.yi.interceptor.ManagerAuthInterceptor"/>
+	  
+	<interceptors>
+		<interceptor>
+			<mapping path="/member/loginPost"/>
+			<beans:ref bean="loginInterceptor"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/reserve/selectSeat"/>
+			<beans:ref bean="authInterceptor"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/member/managerLoginPost"/>
+			<beans:ref bean="managerLoginInterceptor"/>
+		</interceptor>
+		
+		<interceptor>
+			<mapping path="/manager/*"/>
+			<beans:ref bean="managerAuthInterceptor"/>
+		</interceptor>
+	</interceptors>
+	
 	
 	
 </beans:beans>

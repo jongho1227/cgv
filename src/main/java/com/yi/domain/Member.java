@@ -6,7 +6,7 @@ public class Member {
 	private String mbId;
 	private String mbPassword;
 	private String mbName;
-	private Date mbBirth;
+	private String mbBirth;
 	private String mbPhone;
 	private String mbEmail;
 	private Date mbJoinDate;
@@ -15,27 +15,8 @@ public class Member {
 	private int mbMileage;
 	private String mbPassQuestion;
 	private String mbPassAnswer;
-	public Member() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public Member(String mbId, String mbPassword, String mbName, Date mbBirth, String mbPhone, String mbEmail,
-			Date mbJoinDate, boolean mbWithdrawal, Grade mbGrade, int mbMileage, String mbPassQuestion,
-			String mbPassAnswer) {
-		super();
-		this.mbId = mbId;
-		this.mbPassword = mbPassword;
-		this.mbName = mbName;
-		this.mbBirth = mbBirth;
-		this.mbPhone = mbPhone;
-		this.mbEmail = mbEmail;
-		this.mbJoinDate = mbJoinDate;
-		this.mbWithdrawal = mbWithdrawal;
-		this.mbGrade = mbGrade;
-		this.mbMileage = mbMileage;
-		this.mbPassQuestion = mbPassQuestion;
-		this.mbPassAnswer = mbPassAnswer;
-	}
+	private Date mbInfoChange;
+	private Date mbDrop;
 	public String getMbId() {
 		return mbId;
 	}
@@ -54,10 +35,10 @@ public class Member {
 	public void setMbName(String mbName) {
 		this.mbName = mbName;
 	}
-	public Date getMbBirth() {
+	public String getMbBirth() {
 		return mbBirth;
 	}
-	public void setMbBirth(Date mbBirth) {
+	public void setMbBirth(String mbBirth) {
 		this.mbBirth = mbBirth;
 	}
 	public String getMbPhone() {
@@ -108,13 +89,28 @@ public class Member {
 	public void setMbPassAnswer(String mbPassAnswer) {
 		this.mbPassAnswer = mbPassAnswer;
 	}
+	public Date getMbInfoChange() {
+		return mbInfoChange;
+	}
+	public void setMbInfoChange(Date mbInfoChange) {
+		this.mbInfoChange = mbInfoChange;
+	}
+	public Date getMbDrop() {
+		return mbDrop;
+	}
+	public void setMbDrop(Date mbDrop) {
+		this.mbDrop = mbDrop;
+	}
 	@Override
 	public String toString() {
 		return "Member [mbId=" + mbId + ", mbPassword=" + mbPassword + ", mbName=" + mbName + ", mbBirth=" + mbBirth
 				+ ", mbPhone=" + mbPhone + ", mbEmail=" + mbEmail + ", mbJoinDate=" + mbJoinDate + ", mbWithdrawal="
 				+ mbWithdrawal + ", mbGrade=" + mbGrade + ", mbMileage=" + mbMileage + ", mbPassQuestion="
-				+ mbPassQuestion + ", mbPassAnswer=" + mbPassAnswer + "]";
+				+ mbPassQuestion + ", mbPassAnswer=" + mbPassAnswer + ", mbInfoChange=" + mbInfoChange + ", mbDrop="
+				+ mbDrop + "]";
 	}
+	
+	
 	
 	
 }

@@ -3,7 +3,6 @@ package com.yi.service;
 import java.util.List;
 import java.util.Map;
 
-import com.yi.domain.RunTheater;
 import com.yi.domain.RunTime;
 import com.yi.domain.Structure;
 import com.yi.domain.ThInfo;
@@ -22,4 +21,5 @@ public interface TheaterServiceHandlerDao {
 	public RunTime recentInsert() throws Exception;
 	public List<Structure> selectByKwan(String kwan) throws Exception;
 	public void insertRunTheater(Map<String, Object> rMap) throws Exception;
+	public List<RunTime> selectruntheater(Map<String, Object> map) throws Exception;
 }

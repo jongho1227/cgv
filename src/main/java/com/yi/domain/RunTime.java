@@ -10,6 +10,8 @@ public class RunTime {
 	private Date thStart;
 	private Date thEnd;
 	private int rtPrice;
+	private String allSeat;
+	private String remainSeat;
 	private boolean rtWithdrawal;
 	
 	
@@ -30,6 +32,27 @@ public class RunTime {
 		this.rtPrice = rtPrice;
 		this.rtWithdrawal = rtWithdrawal;
 		this.rtName = rtName;
+	}
+
+	
+
+	public String getAllSeat() {
+		return allSeat;
+	}
+
+
+	public void setAllSeat(String allSeat) {
+		this.allSeat = allSeat;
+	}
+
+
+	public String getRemainSeat() {
+		return remainSeat;
+	}
+
+
+	public void setRemainSeat(String remainSeat) {
+		this.remainSeat = remainSeat;
 	}
 
 
@@ -86,8 +109,8 @@ public class RunTime {
 	@Override
 	public String toString() {
 		return "RunTime [rtNumber=" + rtNumber + ", rtName=" + rtName + ", mvNumber=" + mvNumber + ", thName=" + thName
-				+ ", thStart=" + thStart + ", thEnd=" + thEnd + ", rtPrice=" + rtPrice + ", rtWithdrawal="
-				+ rtWithdrawal + "]";
+				+ ", thStart=" + thStart + ", thEnd=" + thEnd + ", rtPrice=" + rtPrice + ", allSeat=" + allSeat
+				+ ", remainSeat=" + remainSeat + ", rtWithdrawal=" + rtWithdrawal + "]";
 	}
 
 

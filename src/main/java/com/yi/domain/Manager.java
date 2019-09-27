@@ -32,8 +32,10 @@ public class Manager {
 
 	@Override
 	public String toString() {
-		return "ManagerVO [mgId=" + mgId + ", mgPass=" + mgPass + "]";
+		return "Manager [mgId=" + mgId + ", mgPass=" + mgPass + "]";
 	}
+
+	
 	
 	
 	

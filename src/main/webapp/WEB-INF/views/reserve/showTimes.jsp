@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../include/brick.jsp"%>
+<%@ include file="../include/header.jsp"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 <style>
 /*---------------------section--------------------*/
-
+a{
+	cursor: pointer;
+}
 section{
 	min-width:1900px;
 	margin:0 auto;
@@ -90,6 +92,7 @@ div#top_ul_next{
 	border-top:2px solid #474746;
 	padding:3px;
 	clear:both;
+	margin-bottom:5px;
 }
 div#top_ul_next p{
 	display:inline;
@@ -141,68 +144,43 @@ div#top_ul_next #right_ul a{
 }
 #small_container #big_ul .ul_title{
 	margin-bottom:15px;
+	margin-left:25px;
 	clear:both;
-	border-top:1px solid black;
-	padding-top:30px;
-}
-#small_container #big_ul #time_last{
-	padding-bottom:30px;
-	border-bottom:2px solid black;
+	padding-top:25px;
 }
 #small_container #big_ul .big_ul_li{
 	padding-bottom:10px;
+	border-top:1px solid black;
 }
-#small_container #big_ul #b12{
+#small_container #big_ul .ul_title{
 	position: relative;
 }
-#year12{
+.year{
 	width:20px; height:20px;
 	color:white;
 	font-weight: bold;
 	font-size:11px;
+	border-radius: 15px;
+	line-height: 20px;
+	text-align:center;
+	display:block;
+	position:absolute;
+	left:-25px;
+}
+.year12{
 	background-color:#006cc7;
-	border-radius: 15px;
-	line-height: 20px;
-	text-align:center;
-	display:block;
-	position:absolute;
-	left:-25px;
-	top:32px;
 }
-#small_container #big_ul #o15_1{
-	position: relative;
-}
-#year15_1{
-	width:20px; height:20px;
-	color:white;
-	font-weight: bold;
-	font-size:11px;
+.year15{
 	background-color:#ff7200;
-	border-radius: 15px;
-	line-height: 20px;
-	text-align:center;
-	display:block;
-	position:absolute;
-	left:-25px;
-	top:32px;
 }
-#small_container #big_ul #o15_2{
-	position: relative;
+.yearAll{
+	background-color:rgb(82, 174, 53);
 }
-#year15_2{
-	width:20px; height:20px;
-	color:white;
-	font-weight: bold;
-	font-size:11px;
-	background-color:#ff7200;
-	border-radius: 15px;
-	line-height: 20px;
-	text-align:center;
-	display:block;
-	position:absolute;
-	left:-25px;
-	top:32px;
+.yearAdult{
+	background-color:rgb(199, 0, 42);
 }
+
+
 #small_container #big_ul .time{
 	margin-bottom:15px;
 	height:42px;
@@ -269,11 +247,62 @@ div#top_ul_next #right_ul a{
 	margin-top:10px;
 	clear:both;
 }
-</style>
 
+#anchor{
+	width: 100%;
+    background-color: #f1f0e5;
+    border-bottom: 1px solid #cacac0;
+    color: #666;
+    font-family: 'CJONLYONENEW', '맑은 고딕', '돋움', Dotum, sans-serif;
+    font-weight: 300;
+    height:25px;
+}
+#anchor ul{
+	list-style: none;
+	width:980px;
+	margin:0 auto;
+}
+#anchor ul li{
+	float: left;
+	line-height: 25px;
+	margin-left: 12px;
+    padding-left: 20px;
+    background: url(${pageContext.request.contextPath}/resources/images/join/ico_arrow.png) no-repeat 0 50%;
+    font-size: 12px;
+    vertical-align: baseline;
+	
+}
+#anchor ul li:first-child {
+	background: none;
+}
+#anchor ul li:first-child img{
+	margin-top:4px;
+}
+#anchor ul li.last{
+	color: #222;
+    font-size: 12px;
+    text-decoration: underline;
+    font-weight: 500;
+}
+</style>
+<div id="anchor">
+	<ul>
+		<li>
+			<a href="/cgv"><img src="http://img.cgv.co.kr/R2014/images/common/btn/btn_home.png"></a>
+		</li>
+		<li>
+			<a href="/cgv/reserve/showTimes2">예매</a>
+		</li>
+		<li class="last">
+			상영시간표
+		</li>
+	</ul>
+</div>
 
 
 <!-- -------------------------------------------------------section------------------------------------------------------------------- -->	
+
+
 <section>
 	
 <div id="container">
@@ -313,186 +342,7 @@ div#top_ul_next #right_ul a{
 		<div id="small_container">
 			
 			<ul id="big_ul">
-				 <c:forEach var="showtimesMovie" items="${showtimesMovieList}">
-				 ${showtimesMovie }
-				 		<li class="big_ul_li">
-							<div class="ul_title" id="o15_1">
-								<span id="year15_1">${showtimesMovie.movie.mvAgeLimit }</span>
-								<h3><a href="#">${showtimesMovie.movie.mvTitle }</a></h3>
-								<span class="running">상영중</span><span class="infor">${showtimesMovie.movie.mvGenre}/${showtimesMovie.movie.mvRuntime}분/<fmt:formatDate value="${showtimesMovie.movie.mvStart}" pattern="yyyy.MM.dd"/>개봉</span>
-							</div>
-							<c:forEach var="kwan" items="${showtimesMovie.getShowtimeskwan()}">
-								<div class="li_title">
-								${kwan }
-									<ul>
-										<li>▶ ${kwan.kwanKind }</li>
-										<li>${kwan.kwanName }</li>
-										<li>총 ${kwan.allSeat }</li>
-									</ul>
-								</div>
-								<div class="time">
-									<ul>
-										<%-- <c:forEach begin="1" end="${kwan.length }">
-											<li><a href="#">${kwan.start }<br> <span class="time_color">${kwan.remainSeat }</span></a></li>
-										</c:forEach> --%>
-										
-									</ul>
-								</div>
-							</c:forEach>
-						</li>	
-					</c:forEach> 
-								
-					
-			
-			  <li class="big_ul_li">
-					
-					
-					
-					<div class="li_title">
-						<ul>
-							<li>▶ 2D</li>
-							<li>2관 6층</li>
-							<li>총 124석</li>
-						</ul>
-					</div>
-					
-					<div class="time">
-						<ul>
-							<li><a href="site3.html">10:35<br> <span class="time_color">89석</span></a></li>
-							<li><a href="site3.html">14:10<br> <span class="time_color">89석</span></a></li>
-							<li><a href="site3.html">17:45<br> <span class="time_color">89석</span></a></li>
-							<li><a href="site3.html">21:20<br> <span class="time_color">89석</span></a></li>
-							<li><a href="site3.html">24:55<br> <span class="time_color">89석</span></a></li>
-							<li><a href="site3.html">28:30<br> <span class="time_color">89석</span></a></li>
-						</ul>
-					</div>
-					
-					<div class="li_title">
-						<ul>
-							<li>▶ 2D</li>
-							<li>3관 8층</li>
-							<li>총 172석</li>
-						</ul>
-					</div>
-					
-					<div class="time">
-						<ul>
-							<li><a href="site3.html">11:05<br> <span class="time_color">89석</span></a></li>
-							<li><a href="site3.html">14:40<br> <span class="time_color">89석</span></a></li>
-							<li><a href="site3.html">18:15<br> <span class="time_color">89석</span></a></li>
-							<li><a href="site3.html">21:50<br> <span class="time_color">89석</span></a></li>
-							<li><a href="site3.html">25:25<br> <span class="time_color">89석</span></a></li>
-						</ul>
-					</div>
-					
-					<div class="li_title">
-						<ul>
-							<li>▶ 2D</li>
-							<li>4관 8층</li>
-							<li>총 124석</li>
-						</ul>
-					</div>
-					
-					<div class="time">
-						<ul>
-							<li><a href="site3.html">10:05<br> <span class="time_color">89석</span></a></li>
-							<li><a href="site3.html">13:40<br> <span class="time_color">89석</span></a></li>
-							<li><a href="site3.html">17:15<br> <span class="time_color">89석</span></a></li>
-							<li><a href="site3.html">20:50<br> <span class="time_color">89석</span></a></li>
-							<li><a href="site3.html">24:25<br> <span class="time_color">89석</span></a></li>
-							<li><a href="site3.html">28:00<br> <span class="time_color">89석</span></a></li>
-						</ul>
-					</div>
-					
-					<div class="li_title">
-						<ul>
-							<li>▶ 2D</li>
-							<li>6관 10층</li>
-							<li>총 124석</li>
-						</ul>
-					</div>
-					
-					<div class="time">
-						<ul>
-							<li><a href="site3.html">16:05<br> <span class="time_color">89석</span></a></li>
-							<li><a href="site3.html">23:25<br> <span class="time_color">89석</span></a></li>
-						</ul>
-					</div>
-					
-					<div class="li_title">
-						<ul>
-							<li>▶ 2D</li>
-							<li>LG GRAM[5관] 10층</li>
-							<li>총 172석</li>
-						</ul>
-					</div>
-					
-					<div class="time">
-						<ul>
-							<li><a href="site3.html">12:20<br> <span class="time_color">89석</span></a></li>
-							<li><a href="site3.html">15:55<br> <span class="time_color">89석</span></a></li>
-							<li><a href="site3.html">23:05<br> <span class="time_color">89석</span></a></li>
-							<li><a href="site3.html">26:40<br> <span class="time_color">89석</span></a></li>
-						</ul>
-					</div>
-					
-					<div class="li_title">
-						<ul>
-							<li>▶ 3D</li>
-							<li>1관[JD SPORTS관]6층</li>
-							<li>총 158석</li>
-						</ul>
-					</div>
-					
-					<div class="time">
-						<ul>
-							<li><a href="site3.html">15:10<br> <span class="time_color">89석</span></a></li>
-							<li><a href="site3.html">18:45<br> <span class="time_color">89석</span></a></li>
-							<li><a href="site3.html">22:20<br> <span class="time_color">89석</span></a></li>
-						</ul>
-					</div>
-				</li>
-				
-				<li class="big_ul_li">
-					<div class="ul_title" id="o15_1"><span id="year15_1">15</span>
-					<h3><a href="http://www.cgv.co.kr/movies/detail-view/?midx=81728">요로나의 저주</a></h3>
-					<span class="running">상영중</span><span class="infor">호러/93분/2019.04.17 개봉</span></div>
-					
-						<div class="li_title">
-							<ul>
-								<li>▶ 2D</li>
-								<li>6관 10층</li>
-								<li>총 124석</li>
-							</ul>
-						</div>
-						
-						<div class="time">
-							<ul>
-								<li><a href="site3.html">12:05<br> <span class="time_color">89석</span></a></li>
-								<li><a href="site3.html">14:05<br> <span class="time_color">89석</span></a></li>
-							</ul>
-					</div>
-					
-				</li>
-				
-				<li class="big_ul_li">
-					<div class="ul_title" id="o15_2"><span id="year15_2">15</span><h3><a href="http://www.cgv.co.kr/movies/detail-view/?midx=81626">바이스</a></h3><span class="running">상영중</span><span class="infor">드라마/132분/2019.04.11 개봉</span></div>
-					
-						<div class="li_title">
-							<ul>
-								<li>▶ 2D</li>
-								<li>6관 10층</li>
-								<li>총 124석</li>
-							</ul>
-						</div>
-						
-						<div class="time" id="time_last">
-							<ul>
-								<li><a href="site3.html">09:20<br> <span class="time_color">89석</span></a></li>
-								<li><a href="site3.html">27:00<br> <span class="time_color">89석</span></a></li>
-							</ul>
-					</div>
-				</li> 
+				 
 			</ul>
 		</div>
 	</div>
@@ -511,27 +361,179 @@ div#top_ul_next #right_ul a{
 	
 </section>
 <script>
+	$.ajax({
+		url : "${pageContext.request.contextPath}/reserve/showTimesData",
+		type : "get",
+		dataType : "json",
+		success : function(res){
+			console.log(res);
+			if(res.no=="no"){
+				alert("현재 상영중인 영화가 없습니다.");
+				return;
+			}
+			$(res.stM).each(function(i,obj){
+				var year = obj.substring(0,4);
+				var month = obj.substring(5, 7);
+				var day = obj.substring(17,18);
+				var date = obj.substring(8,10);
+				var $li = $("<li class='showDate' data-date='"+obj.substring(0,10)+"'>");
+				var $a = $('<a href="javascript:void(0);">'); // yyyy-MM-dd 형식으로 넘겨야함.
+				var $span = $("<span>");
+				$span.html(month+"월"+day);
+				$a.append($span).append(" "+date);
+				$li.append($a);
+				$("#date_ul").append($li);
+				
+			})
+			list(res);
+		}
+	})
 
+function kwan(obj){
+		var $liS = $("<li>");
+		var $aS = $('<a href="${pageContext.request.contextPath}/reserve/selectSeat?rtNumber='+obj.rtNumber+'&reMain='+obj.remainSeat+'&all='+obj.allSeat+'&start='+obj.thStart+'&end='+obj.thEnd+'&movie='+obj.mvNumber.mvTitle+'&img='+obj.mvNumber.mvImg+'">');
+		var $br = $("<br>");
+		var $spanTC = $('<span class="time_color">');
+		$spanTC.append(obj.remainSeat).append("석");
+		
+		var d = new Date(obj.thStart);
+		var time = ("00"+d.getHours()).slice(-2)+":"+ ("00"+d.getMinutes()).slice(-2);
+		
+		$aS.append(time).append($br).append($spanTC);
+		$liS.append($aS);
+		return $liS;
+	}
+function kwan2(obj){
+	var $divL = $('<div class="li_title" data-kwan="'+obj.thName.thName+'">');
+	var $ul = $("<ul>");
+	var $liK = $("<li>");
+	var $liN = $("<li>");
+	var $liA = $("<li>");
+	
+	$liK.append("▶").append(obj.thName.thKinds);
+	$liN.append(obj.thName.thName);
+	$liA.append("총").append(obj.allSeat).append("석");
+	$ul.append($liK).append($liN).append($liA);
+	$divL.append($ul);
+	
+	return $divL;
+}
+function showtime(obj){
+	var $divT = $('<div class="time">');
+	var $ul2 = $("<ul>");
+	var $liS = kwan(obj);
+	$ul2.append($liS); 
+	$divT.append($ul2);
+	return $divT;
+}
+function list(res){
+	$("#big_ul").empty();
+	var count = 0; // 영화 인덱스.
+	$(res.cList).each(function(i,obj){
+		if(count>0){//두번째부터
+			var li = $("#big_ul").find(".big_ul_li").eq(count-1); // 바로 전에 추가된 li
+			var mname = $(li).find(".ul_title").eq(0);//바로전에 추가된 영화
+			if($(mname).attr("data-movie")==obj.mvNumber.mvNumber){//바로전에 추가된 영화랑 이름이 같으면
+					//li를 추가할 필요없음. 제목추가할 필요없음.
+					
+				var kname = $(li).find(".li_title:last");
+				if(obj.thName.thName ==$(kname).attr("data-kwan") ){ // 상영관도 같음.
+					var $liS = kwan(obj);
+					kname.next().find("ul").append($liS);
+					
+					
+				}else{// 상영관이 다름.
+					var $divL = kwan2(obj);
+					li.append($divL);
+					
+					// 시작시간
+					var $divT = showtime(obj);
+					li.append($divT);
+				}
+				
+			}else{ // 바로전에 추가된 영화랑 이름이 다르면영화이름이 다르면
+				movieList(obj);
+				count++;
+				}
+			
+		}else{ // 처음 실행하는거.
+			movieList(obj);
+			count++;
+		}
+	})
+	
+	
+	var a = $("#big_ul").find(".year");
 
+	$(a).each(function(i,obj){
+		if($(obj).attr("data-age")=='12'){
+			$(obj).addClass("year12");
+		}
+		if($(obj).attr("data-age")=='15'){
+			$(obj).addClass("year15");
+		}
+		if($(obj).attr("data-age")=='전체'){
+			$(obj).addClass("yearAll");
+		}
+		if($(obj).attr("data-age")=='청불'){
+			$(obj).addClass("yearAdult");
+		}
+	})
+}
 
- 	$(".showDate").click(function(){
- 		var showDate = $(this).attr("data-date");
- 		alert(showDate);
- 		
+ function movieList(obj){
+	
+	var $li = $('<li class="big_ul_li">')
+	var $div = $('<div class="ul_title" data-movie="'+obj.mvNumber.mvNumber+'">');
+	var $spanY = $('<span class="year" data-age="'+obj.mvNumber.mvAgeLimit+'">');
+	var $h3 = $('<h3>');
+	var $a = $('<a href="#" data-movie="'+obj.mvNumber.mvNumber+'" class="mvNumber">'); // 영화번호 담음.
+	var $spanR = $('<span class="running">');
+	var $spanI = $('<span class="infor">');
+	var date = new Date(obj.mvNumber.mvStart);
+	var genre = obj.mvNumber.mvGenre+"/"+obj.mvNumber.mvRuntime+"분/"+date.getFullYear()+"-"+("00"+(date.getMonth()+1)).slice(-2)+"-"+("00"+date.getDate()).slice(-2)+"개봉";
+	
+	$spanY.append(obj.mvNumber.mvAgeLimit);
+	$a.append(obj.mvNumber.mvTitle);
+	$h3.append($a);
+	$spanR.append("상영중");
+	$spanI.append(genre);
+	$div.append($spanY).append($h3).append($spanR).append($spanI);
+	$li.append($div); // 영화 등록
+	
+	
+	// 관
+	var $divL = kwan2(obj);
+	$li.append($divL);
+	
+	// 시작시간
+	var $divT = showtime(obj);
+	$li.append($divT);
+	
+	$("#big_ul").append($li);
+	
+}	
+ 	
+ 	$(document).on("click",".showDate",function(){
+ 		var closeDate = $(this).attr("data-date");
  		$.ajax({
  			url : "${pageContext.request.contextPath}/reserve/showTimes",
  			type : "post",
- 			data : JSON.stringify({showDate:showDate}),
+ 			data : JSON.stringify({closeDate:closeDate}),
  			headers:{
 				"Content-Type":"application/json"
 			},
  			dataType : "json",
  			success : function(res){
  				console.log(res);
+ 				list(res);
  			}
  		})
  	})
+ 	
+ 	
+ 	
 		 
-		 </script>
+</script>
 
 <%@ include file="../include/footer.jsp"%>

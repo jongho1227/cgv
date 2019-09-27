@@ -47,10 +47,10 @@
 	</bean>
 	<tx:annotation-driven/>
 	
-	<aop:aspectj-autoproxy/><!-- aop등록 -->
+	<aop:aspectj-autoproxy proxy-target-class="true"/><!-- aop등록 -->
 	<!--안에 있는 클래스들을 빈으로 인식하게 한다. -->
 	<context:component-scan base-package="com.yi.persistence"></context:component-scan>
 	<context:component-scan base-package="com.yi.service"></context:component-scan>
-	<context:component-scan base-package="com.yi.aop"></context:component-scan><!-- aop등록 -->
+
 	<aop:config/><!-- aop등록 -->	
 </beans>

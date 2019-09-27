@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yi.mapper.MemberMapper">
+		<resultMap type="Member" id="memberForm">
+			<id column="mb_id" property="mbId"/>
+			<result column="mb_password" property="mbPassword"/>
+			<result column="mb_name" property="mbName"/>
+			<result column="mb_birth" property="mbBirth"/>
+			<result column="mb_phone" property="mbPhone"/>
+			<result column="mb_email" property="mbEmail"/>
+			<result column="mb_join_date" property="mbJoinDate"/>
+			<result column="mb_withdrawal" property="mbWithdrawal"/>
+			<result column="mb_mileage" property="mbMileage"/>
+			<result column="mb_pass_question" property="mbPassQuestion"/>
+			<result column="mb_pass_answer" property="mbPassAnswer"/>
+			<result column="mb_info_change" property="mbInfoChange"/>
+			<result column="mb_drop" property="mbDrop"/>
+		</resultMap>
+		
+		<resultMap type="Member" id="memberForm2" extends="memberForm">
+			<association property="mbGrade" resultMap="com.yi.mapper.GradeMapper.gradeForm"></association>
+		</resultMap>
+		
+		<select id="selectDuplMember" parameterType="Member" resultMap="memberForm2">
+			select * from member where mb_id = #{mbId}
+		</select>
+		
+		<insert id="insertMember" parameterType="Member">
+			insert into member(mb_id, mb_password, mb_name, mb_birth, mb_phone,mb_email,mb_pass_question,mb_pass_answer)
+			values (#{mbId},password(#{mbPassword}),#{mbName},#{mbBirth},#{mbPhone},#{mbEmail},#{mbPassQuestion},#{mbPassAnswer})
+		</insert>
+		
+		<select id="selectlMemberByIdPass" parameterType="Member" resultMap="memberForm2">
+			select * from member where mb_id = #{mbId} and mb_password = password(#{mbPassword})
+		</select>
+</mapper>
+
+
+
+
+
+
+

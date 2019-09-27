@@ -1,6 +1,5 @@
 package com.yi.service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -15,8 +14,11 @@ public interface ReservationServiceHandlerDao {
 	public Movie selectMovie(Movie mv) throws Exception;
 	public ThInfo selectName(String thName) throws Exception;
 	public List<RunTheater> selectAllSeat(Map<String, Object> map) throws Exception;
-	public List<RunTheater> selectUnReserve(Map<String, Object> map) throws Exception;
+	public List<RunTheater> selectUnReserve(String no) throws Exception;
 	public List<RunTime> selectDateAll(String showDate) throws Exception;
 	public RunTime selectOneClose() throws Exception;
 	public List<RunTime> selectDateClose(String closeDate) throws Exception;
+	public List<RunTime> selectDateCloseKwan(Map<String, Object> map) throws Exception;
+	public List<RunTime> selectDateCloseKwanTime(Map<String, Object> map) throws Exception;
+	public void outReservation(Map<String, Object> map) throws Exception;
 }

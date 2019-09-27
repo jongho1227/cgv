@@ -2,6 +2,7 @@ package com.yi.service;
 
 import java.util.List;
 
+import com.yi.domain.Manager;
 import com.yi.domain.Movie;
 import com.yi.domain.RunTime;
 import com.yi.domain.ThInfo;
@@ -19,4 +20,5 @@ public interface MovieServiceHandlerDao {
 	public void updateRMovie(RunTime rt) throws Exception;
 	public void updateMv(Movie mv) throws Exception;
 	public List<RunTime> selectByTimeAndThName(RunTime rt) throws Exception;
+	
 }

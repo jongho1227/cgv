@@ -6,7 +6,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.yi.domain.RunTheater;
 import com.yi.domain.RunTime;
 import com.yi.domain.Structure;
 import com.yi.domain.ThInfo;
@@ -104,5 +103,13 @@ public class TheaterServiceHandlerImpl implements TheaterServiceHandlerDao {
 		rtDao.insertRunTheater(rMap);
 		
 	}
+
+	@Override
+	public List<RunTime> selectruntheater(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return rDao.selectruntheater(map);
+	}
+
+	
 
 }

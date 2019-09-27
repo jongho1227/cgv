@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.yi.domain.Manager;
 import com.yi.domain.Movie;
 import com.yi.domain.RunTime;
 import com.yi.domain.Structure;
@@ -49,7 +50,6 @@ public class ManagerMovieController {
 	
 	@Resource(name="uploadPath")
 	private String uploadPath;
-	
 	
 	@RequestMapping(value="displayFile", method=RequestMethod.GET)
 	public @ResponseBody ResponseEntity<byte[]> displayFile(String filename) throws IOException{

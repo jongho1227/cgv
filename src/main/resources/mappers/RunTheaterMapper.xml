@@ -9,7 +9,9 @@
 			<result column="seat_number" property="seatNumber"/>
 			<result column="rv_withdrawal" property="rvWithdrawal"/>
 		</resultMap>
-		
+		<resultMap type="RunTheater" id="runTheaterForm2" extends="runTheaterForm">
+			<association property="structure" resultMap="com.yi.mapper.StructureMapper.structureForm2"></association>
+		</resultMap>
 		
 		<insert id="insertRunTheater" parameterType="map">
 			<if test="sList.size != 0">
@@ -32,13 +34,19 @@
 			where rt_number = #{rtNumber}
 		</update>
 		
-		<select id="selectAllSeat" parameterType="map" resultType="RunTheater">
-			select * from runtheater where rt_number = #{no} and th_name=#{kwan}
+		<select id="selectAllSeat" parameterType="map" resultMap="runTheaterForm2">
+			select * from structure where th_name=#{kwan} and use_withdrawal = true
 		</select>
 		
-		<select id="selectUnReserve" parameterType="map" resultType="RunTheater">
-			select * from runtheater where rt_number = #{no} and th_name=#{kwan} and rv_withdrawal = false
+		<select id="selectUnReserve" parameterType="String" resultMap="runTheaterForm2">
+			select * from runtheater r join `structure` s on r.seat_number = s.seat_number where r.th_name=s.th_name and r.rt_number=#{no} order by r.rt_number, left(r.seat_number,1), length(r.seat_number);
 		</select>
+		
+		<update id="updateByRev" parameterType="map">
+			update runtheater
+			set rv_withdrawal= true
+			where rt_number = #{rtNumber} and seat_number = #{seat}
+		</update>
 </mapper>
 
 

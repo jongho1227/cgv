@@ -5,9 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.yi.domain.Manager;
 import com.yi.domain.Movie;
 import com.yi.domain.RunTime;
 import com.yi.domain.ThInfo;
+import com.yi.persistence.ManagerDao;
 import com.yi.persistence.MovieDao;
 import com.yi.persistence.RunTheaterDao;
 import com.yi.persistence.RuntimeDao;
@@ -25,6 +27,7 @@ public class MovieServiceHandlerImpl implements MovieServiceHandlerDao {
 	RuntimeDao rDao;
 	@Autowired
 	RunTheaterDao rtDao;
+	
 	@Override
 	public void insertMovie(Movie movie) throws Exception {
 		mDao.insertMovie(movie);
